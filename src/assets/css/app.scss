@@ -1,0 +1,21 @@
+@import './styleGuide.scss';
+
+*{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    line-height: 125%;
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
+}
+body{
+    margin: 0;
+    
+}
+#app {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    background-color: $basicEarthColor;
+    // height: 634px;
+    // background-color: $basicBlueColor;
+}

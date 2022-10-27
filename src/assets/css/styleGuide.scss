@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+// $windowFullScreen:calc(100vw - (100vw - 100%));
+// $radiusRule:1.5rem; // 24px
+
+// 網格
+$xxs:414px;
+
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xlg:1200px;
+$xxlg:1400px;
+
+
+// 灰階
+$blackColor: black;
+$gray900Color: #262626;;
+$gray800Color: #333333;
+$gray700Color: #414042;;
+$gray600Color: #666666;
+$gray500Color: #808080;
+$gray400Color: #999999;
+$gray200Color: #cccccc;
+
+$gray100Color: #e5e5e5;
+$gray50Color: #f2f2f2;
+$gray40Color: #F5F5F5;
+$whiteColor: white;
+
+// 標準色
+$basicBlueColor:#204379;
+$basicEarthColor:#E2D9D3;
+
+$head38:2.375rem; // 38px
+$head34: 2.125rem; // 34px;
+$head32: 2rem; // 32px;
+$head28: 1.75rem; // 28px;
+$head24: 1.5rem; // 24px;
+$head22: 1.375rem; // 22px;
+$head20: 1.25rem; // 20px;
+$word18: 1.125rem; // 18px
+$word16: 1rem; // 16px
+$word14: 0.875rem; // 14px
+$notes12: 0.75rem; // 12px;
+$notes11: 0.6875rem; // 11px;
+
+
+
+
+@mixin centerRule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin chartWidth {
+    letter-spacing: 1.14286px;
+    text-indent: 1.14286px;
+}
+
+@mixin btnRule {
+    @include centerRule();
+    
+}
