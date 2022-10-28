@@ -1,11 +1,16 @@
 @import '../styleGuide.scss';
 
 
-.form_bg{
+.form_top_bg{
     background-color: $basicBlueColor;
-    height: 634px;
+    min-height: 634px;
+    
     position: relative;
     overflow: hidden;
+    
+    
+    
+
     .waves{
         position: absolute;
         top: calc(-4980px * 10);
@@ -33,17 +38,105 @@
         }
         
     }
-    
-    .top{    
-        h2{
-            font-weight: 700;
-            font-size: 32px;
-            color: white;
-            div{
+
+    .form_top_contents{
+        width: 100%;
+        // position: absolute;
+        // z-index: 2;
+        padding: 60px 0;
+
+        
+
+        .top{ 
             
+            text-align: center;
+            @include centerRule();
+            flex-direction: column;
+            
+            h2{
+                font-size: $head32;
+                color: white;
+            }
+            .goFormBtn{
+                padding: 2rem 0;
+                z-index: 1;
+            }
+
+            section{
+                padding: $head24 $word16;
+                // width: 808px;
+                width: 100%;
+                background: $lightBlueColor;
+                border: 2px solid $basicBrownColor;
+                border-radius: 20px;
+                color: $basicBlueColor;
+                position: relative;
+                &::after{
+                    content: url('./../../images/boat-fireworks.png');
+                    position: absolute;
+                    left: 0px;
+                    bottom:-55px;
+                    
+                }
+                &::before{
+                    content: url('./../../images/boat.svg');
+                    position: absolute;
+                    right:  25px;
+                    top: -35px;
+                    
+                }
+                .paragGroup{
+                    padding-bottom: 2rem;
+                    align-self:stretch;
+                    &:last-child{
+                        padding-bottom: 0;
+                    }
+
+                    li{
+                        font-weight: 400;
+                        font-size: $word16;
+                        line-height: 180%;
+                        list-style: none;
+                        text-align: left;
+                        display: flex;
+                        
+                        span{
+                            font-weight: 700;
+                            line-height: 180%;
+                            text-decoration: underline;
+                            &.noUnder{
+                                text-decoration:none
+                            }
+                        }
+                    }
+                }
+                
+
+
             }
         }
+        
+
     }
+
+    
+}
+.curve{
+    height: 110px;
+    background: url('./../../images/waves_bg.png');
+}
+
+
+.form_bottom_contents{
+    padding: 40px 20px;
+    width: 100%;
+    height: 575px;
+    background: white;
+    border: 2px solid $basicBrownColor;
+    box-shadow: 0px 1px 20px rgba(73, 72, 72, 0.25);
+    border-radius: 1rem;
+    
+    
 }
 
 
@@ -55,10 +148,10 @@
         -ms-transform: rotate(0deg);
         -o-transform: rotate(0deg);
     }to{
-            transform: rotate(360deg);
-            -webkit-transform: rotate(360deg);
-            -moz-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-            -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
     }
 }

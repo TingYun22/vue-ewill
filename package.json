@@ -1,5 +1,5 @@
 {
-  "name": "iwin-vue",
+  "name": "vue-ewill",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,8 +15,9 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^2.0.8",
     "bootstrap": "^5.2.2",
-    "bootstrap-vue": "^2.22.0",
     "core-js": "^3.8.3",
+    "jquery": "^3.6.1",
+    "popper.js": "^1.16.1",
     "vue": "^2.7.10",
     "vue-router": "^3.5.3",
     "vue-slick-carousel": "^1.0.6",

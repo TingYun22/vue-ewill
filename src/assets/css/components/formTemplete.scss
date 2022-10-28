@@ -1,0 +1,31 @@
+@import '../styleGuide.scss';
+
+
+#form1{
+    >div{
+        >*{
+            width: 100%;
+            text-align: left;
+        }
+
+        label{
+            font-weight: 400;
+            font-size: $word16;
+            line-height: 140%;
+            padding-bottom: 6px;
+            span{
+                color: $basicBrownColor;
+                padding-left: 4px;
+            }
+        }
+        input{
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid $basicBlueColor;
+            border-radius: 20px;
+            
+    
+        }
+    }
+    
+}

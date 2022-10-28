@@ -38,4 +38,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./@/../assets/css/app.scss"></style>
+<style lang="scss" src="./@/../assets/css/app.scss" scoped></style>

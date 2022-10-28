@@ -29,7 +29,11 @@ $whiteColor: white;
 
 // 標準色
 $basicBlueColor:#204379;
+$lightBlueColor:#DAE4F1;
 $basicEarthColor:#E2D9D3;
+$basicBrownColor:#B57556;
+$lightPinkColor:rgba(250, 163, 163, 0.91);
+
 
 $head38:2.375rem; // 38px
 $head34: 2.125rem; // 34px;
@@ -54,8 +58,8 @@ $notes11: 0.6875rem; // 11px;
 }
 
 @mixin chartWidth {
-    letter-spacing: 1.14286px;
-    text-indent: 1.14286px;
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
 }
 
 @mixin btnRule {

@@ -1,0 +1,13 @@
+@import '../styleGuide.scss';
+
+.buttonShap{
+    width: 200px;
+    height: 57px;
+    padding: $word16 $head20;
+    font-size: $word18;
+    color: white;
+    background: $basicBrownColor;
+    box-shadow: 0px 0px 20px $lightPinkColor;
+    border-radius: 50px;
+    @include chartWidth();
+}
