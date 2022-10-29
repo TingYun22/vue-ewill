@@ -1,0 +1,10 @@
+{
+  "A": { "num": "ONE", "text": "dehumidifier" },
+  "B": { "num": "ONE", "text": "range hood" },
+  "C": { "num": "ONE", "text": "vacuum cleaner" },
+  "D": { "num": "ONE", "text": "toaster" },
+  "E": { "num": "ONE", "text": "scale" },
+  "F": { "num": "ONE", "text": "straightening iron" },
+  "G": { "num": "FIVE", "text": "vacuum cleaner" },
+  "H": { "num": "TEN", "text": "rice cooker" }
+}

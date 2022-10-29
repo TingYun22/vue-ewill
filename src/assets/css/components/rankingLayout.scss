@@ -1,0 +1,15 @@
+@import '../styleGuide.scss';
+
+.rankingMaxWidth{
+    padding: 40px calc(85px - 24px - 2rem);
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media screen and(max-width:$md) {
+        padding-left:0;
+        padding-right:0;
+    }
+    
+}

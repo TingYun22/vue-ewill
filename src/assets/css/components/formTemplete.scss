@@ -2,30 +2,133 @@
 
 
 #form1{
-    >div{
-        >*{
-            width: 100%;
-            text-align: left;
+    
+    .form1_outer{
+        
+        padding: 40px 20px;
+        width: 100%;
+        background: white;
+        border: 2px solid $basicBrownColor;
+        box-shadow: 0px 1px 20px rgba(73, 72, 72, 0.25);
+        border-radius: 1rem;
+        margin:0 0 42px 0;
+        margin-top: 5rem;
+
+        #form1_title{
+            position: absolute;
+            top:calc(-45px / 2 );
+            left: 0;
+            right: 0;
+            &::after{
+                content: url('../../images/turtle.svg');
+                position: absolute;
+                top: calc(-20px /2);
+                left: calc(50% + 65px / 2);
+                // right: 0;
+            }
+            h3{
+                margin: 0;
+                font-size: $word18;
+                color: $basicBrownColor;
+                padding: 10px 20px;
+                width: fit-content;
+                height: 43px;
+                background: white;
+                border: 2px solid $basicBrownColor;
+                box-shadow: 0px 1px 10px rgba(73, 72, 72, 0.25);
+                border-radius: 50px;
+                @include chartWidth();
+                margin: 0 auto;
+            }  
         }
 
-        label{
-            font-weight: 400;
-            font-size: $word16;
-            line-height: 140%;
-            padding-bottom: 6px;
-            span{
-                color: $basicBrownColor;
-                padding-left: 4px;
+        >div:not(.form1_title){
+            padding: 5px 0;
+            width: 100%;
+            // outline: 1px solid red;
+    
+            >*:not(h3){
+                width: 100%;
+                text-align: left;
             }
-        }
-        input{
-            padding: 0.5rem 1rem;
-            background: white;
-            border: 1px solid $basicBlueColor;
-            border-radius: 20px;
+    
             
     
+            label{
+                font-weight: 400;
+                font-size: $word16;
+                line-height: 140%;
+                padding-bottom: 6px;
+                span{
+                    color: $basicBrownColor;
+                    padding-left: 4px;
+                }
+            }
+            input,select{
+                font-weight: 400;
+                font-size: $word16;
+                line-height: 140%;
+                color: $textColor2;
+
+                padding: 0.5rem 1rem;
+                background: white;
+                border: 1px solid $basicBlueColor;
+                border-radius: 20px;
+
+                background-image: none;
+                background-color: white;
+                box-shadow: inset 0 0 0 2px transparent;
+                transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+               
+                &:focus{
+                    outline: none;
+                    border: 1px solid $focusBlueColor;
+                    background-color: white;
+                    box-shadow: inset 0 0 0 2px $focusBlueColor;
+                    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                }
+                
+                
+                &.error{
+                    border: 1px solid $errorRedColor;
+                    box-shadow: inset 0 0 0 2px $errorRedColor;
+                    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                    
+            }
+                
+            }
+            .selectGroup{
+                position: relative;
+                // outline: 1px solid red;
+    
+            }
+
+            #help{
+                min-height:calc(16.8px + 4px);
+                font-weight: 400;
+                font-size: $notes12;
+                line-height: 140%;
+                padding-top: 4px;
+                color: $errorRedColor;
+            }
+
+            .arrow{
+                position: absolute;
+                bottom: calc(40px / 2 - 6px);
+                right: 25px;
+            }
+           
+            
+            
         }
+
+        
     }
+
+    
+ 
+    
+
+    
     
 }

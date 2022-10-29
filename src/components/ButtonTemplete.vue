@@ -1,7 +1,7 @@
 <template>
-    <div class="buttonShap">
+    <button class="buttonShap" :class="btnText.toLowerCase()">
        {{btnText}}
-    </div>
+    </button>
 </template>
 
 <script>

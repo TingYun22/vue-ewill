@@ -15,8 +15,8 @@
                                 <div>There is no one</div>
                                 <div>who loves pain</div>
                             </h2>
-                            <div class="goFormBtn">
-                                <ButtonTemplete :text="'FORM'"/>
+                            <div class="goFormBtn" @click.prevent="scrollTo('#form1_title')">
+                                <ButtonTemplete :text="'FORM'"  />
                             </div>
                             <section>
                                 <div class="paragGroup">
@@ -50,28 +50,66 @@
                 </div>
             </template>
         </ContentLayout>
+        <div class="lottery_top_bg">
+            <ContentLayout>
+                <template v-slot:contain>
+                    <RankingLayout>
+                        <template v-slot:contain>
+                            <template v-for="(val,ind) in awardsData">
+                                    <AwardCard :key="ind" :contain="{val,ind}" />         
+                            </template>
+                        </template>
+                    </RankingLayout>
+                </template>
+            </ContentLayout>
+        </div>
+        <div class="lottery_botton">
+            <div class="info">
+                <span></span>
+                <div class="info_date">13.32</div>
+                <div>who seeks after it and</div>
+                <div>wants to have it</div>
+            </div>
+            <div class="pic">
+                <img src="@/assets/images/lighthouse.png" alt="">
+            </div>
+        </div>
+        <div class="market_bg">
+            <div class="info">
+                <div>Neque porro quisquam</div>
+                <div>est qui dolorem!</div>
+            </div>
+            <div class="pic">
+                <img src="@/assets/images/market.png" alt="">
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import awards from '../data/awards.json'
 
 import ContentLayout from './ContentLayout.vue'
+import RankingLayout from './RankingLayout.vue'
 import ButtonTemplete from './ButtonTemplete.vue'
 import ParagraphTitle from './parts/ParagraphTitle.vue'
+import AwardCard from './parts/AwardCard.vue'
 import FormTemplete from './FormTemplete.vue'
 
 export default{
     name:'FormPage',
     components:{
         ContentLayout,
+        RankingLayout,
         ButtonTemplete,
         ParagraphTitle,
+        AwardCard,
         FormTemplete
     },
     data(){
         return{
             // vueCanvas: null
-            
+            awardsData:{...awards}
         }
     },
     mounted(){
@@ -87,6 +125,11 @@ export default{
         // this.vueCanvas.quadraticCurveTo(125,25,75,25);
         // this.vueCanvas.stroke(); 
     },
+    methods:{
+        scrollTo(id) {
+            document.querySelector(id).scrollIntoView( {behavior : 'smooth'} );
+        }
+    }
     
 }</script>
 
