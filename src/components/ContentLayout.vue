@@ -1,7 +1,7 @@
 <template>
-    <div class="contentMaxWidth">
-        <slot name="contain" />
-    </div>
+  <div class="contentMaxWidth">
+    <slot name="contain" />
+  </div>
 </template>
 
 <script>

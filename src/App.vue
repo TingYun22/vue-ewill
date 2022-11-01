@@ -1,14 +1,14 @@
 <template>
-    <div id="app">
-        <FormPage />
-    </div>
+  <div id="app">
+    <FormPage />
+  </div>
 </template>
 
 <script>
-import FormPage from "./components/FormPage.vue";
+import FormPage from './components/FormPage.vue'
 
 export default {
-    name: "App",
+    name: 'App',
     components: {
         FormPage,
         
@@ -17,25 +17,25 @@ export default {
     data() {
         return {
             
-        };
+        }
     },
     created() {
-        window.addEventListener("scroll", this.updateScroll);
+        window.addEventListener('scroll', this.updateScroll)
     },
 
     methods: {
         updateScroll() {
-            this.scrollPosition = window.scrollY;
+            this.scrollPosition = window.scrollY
             // console.log(window.scrollY);
         },
         clickShowMenu() {
-            this.isShow = !this.isShow;
+            this.isShow = !this.isShow
             if (this.isShow) {
-                this.$refs.nav.classList.remove("changeColor");
+                this.$refs.nav.classList.remove('changeColor')
             }
         },
     },
-};
+}
 </script>
 
 <style lang="scss" src="./@/../assets/css/app.scss" scoped></style>

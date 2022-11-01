@@ -1,5 +1,5 @@
 <template>
-    <button class="buttonShap" :class="btnText.toLowerCase()">
+    <button class="buttonShap" :class="btnText.toLowerCase()" >
        {{btnText}}
     </button>
 </template>
@@ -15,6 +15,11 @@ export default{
     data(){
         return{
             btnText:this.text
+        }
+    },
+    methods:{
+        checkType(e){
+            console.log(e.type);
         }
     }
     

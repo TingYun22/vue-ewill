@@ -30,8 +30,8 @@ export default{
         }
     },
     data(){
-        let value;
-        let index;
+        let value
+        let index
         for(let i in this.contain){
             index=this.contain[i]
             value=this.contain['val']
