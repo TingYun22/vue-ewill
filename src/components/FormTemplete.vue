@@ -1,23 +1,36 @@
 <template>
-    <form name="form1" id="form1" autocomplete="off" v-on:submit.prevent="checkSubmit">
+    <form name="form1" id="form1" autocomplete="off" v-on:submit="checkSubmit">
         <div class="form1_outer">
             <div id="form1_title">
                 <h3>FORM</h3>
             </div>
-            <div>
+            <div class="store_piece">
                 <label for="store">store <span>*</span></label>
-                <input v-model="inputValue.store" type="text" name="store" id="store" placeholder="placeholder text"
-                >
+                <div class="storeGroup">
+                    <input v-model="inputValue.store" type="text" name="store" id="store" placeholder="placeholder text"
+                    @input="checkStore"
+                    >
+                    <div class="arrow">
+                    </div>
+                </div>
+                <div class="store_option" v-if="isShow">
+                    <ul>
+                        <template v-for="store in results">
+                            <li :key="store" @click="setStore(store)">{{store}}</li>
+                        </template>
+                    </ul>
+                </div>
                 <div id="help"></div>
             </div>
             <div>
                 <label for="name">name <span>*</span></label>
-                <input v-model="inputValue.name" type="text" name="name" id="name" placeholder="placeholder text">
+                <input v-model="inputValue.name" type="text" name="name" id="name" placeholder="placeholder text"
+                >
                 <div id="help"></div>
             </div>
             <div>
                 <label for="phone">phone <span>*</span></label>
-                <input v-model="inputValue.phone" type="number" id="phone" placeholder="placeholder text" maxlength="10"
+                <input v-model="inputValue.phone" type="number" id="phone" placeholder="placeholder text" maxlength="10" name="phone"
                  >
                 <div id="help" ></div>
             </div>
@@ -29,22 +42,49 @@
             <div>
                 <label >payment <span>*</span></label>
                 <div class="selectGroup">
-                    <select class="form-control">
+                    <select class="form-control" name="payment">
                         <option value="0" selected>digital payment</option>
                         <option value="1">ATM</option>
                     </select>
-                    <div class="arrow"><i class="fa-solid fa-sort-down"></i></div>
+                    <div class="arrow">
+                    </div>
                 </div>
                 <div id="help"></div>
             </div>
         </div>
 
-        <ButtonTemplete :text="'submit'" />
+        
+            <ButtonTemplete :text="'submit'" >
+                <template v-slot:btn_contain>
+                        
+                            <div v-if="isSubmit.send">
+                                <template v-if="isSubmit.isOk">
+                                    <img src="@/assets/images/success.png" alt="">
+                                    <div>success</div>
+                                </template>
+                                <template v-else>
+                                    <img src="@/assets/images/failure.png" alt="">
+                                    <div>failure</div>
+                                </template>
+                            </div>
+                            <div v-else>
+                                submit
+                            </div>
+                        
+                </template>
+            </ButtonTemplete>
+            <div id="submit_help">
+                <template v-if="isSubmit.send && !isSubmit.isOk">
+                    This person does not exist
+                </template>
+                <template v-else></template>
+            </div>
         
     </form>
 </template>
 
 <script>
+
 import stores from './../data/stores.json'
 import ButtonTemplete from './ButtonTemplete.vue'
 
@@ -56,16 +96,22 @@ export default{
     data(){
         return{
             inputValue:{
-                store:null,
+                store:'',
                 name:'',
                 phone:'',
                 amout:null
+            },
+            results:[],
+            isShow:false,
+            isSubmit:{
+                send:false,
+                isOk:false
             },
             storesData:[...stores]
         }
     },
     mounted(){
-        // console.log(this.storesData)
+        
         $("input").on('keyup keypress blur change keydown', function (e) {
             const event=e.type
             
@@ -77,7 +123,7 @@ export default{
 
                     if(id=='phone' || id=='amout'){
                         if(event=='keydown' && (e.which == 46 || e.which ==110)){
-                                return false;
+                            return false;
                         }
                         if(event=='keydown' && parseInt($(this).val().length) > parseInt($(this).attr('maxlength')-1) ){
                             return false;
@@ -88,11 +134,11 @@ export default{
                         case 'phone':
                             for(let i=0;i< $(this).val().length; i++){
                                 let word=$(this).val()[i]
-                                if((i==0 && word!=='0') || (i==1 && word!=='9')){
-                                    $(this).siblings('#help').text('wrong format')
+                                if((i==0 && word!=='0') || (i==1 && word!=='9' )){
+                                    $(this).css({'border':'1px solid #E06D6D','box-shadow':'inset 0 0 0 2px #E06D6D'}).siblings('#help').text('wrong format')
                                     return false;
                                 }else{
-                                    $(this).siblings('#help').text('')
+                                    $(this).css({'border':'1px solid #204379','box-shadow':'inset 0 0 0 2px transparent'}).siblings('#help').text('')
                                 }
                             }
                             break;
@@ -101,58 +147,70 @@ export default{
                                 let word=$(this).val()[i]
                                 if(i==0 && word=='0'){
                                     $(this).val(`${parseInt(copyVal)}`)
+                                    if($(this).val()!=''){
+                                        $(this).css({'border':'1px solid #204379','box-shadow':'inset 0 0 0 2px transparent'})
+                                    }
+
+                                     
                                 }else{
-                                    $(this).siblings('#help').text('')
+                                    $(this).css({'border':'1px solid #204379','box-shadow':'inset 0 0 0 2px transparent'}).siblings('#help').text('')
                                 }
                             }
                             break;
                     }
-                    
-                    
-                    
                 }
             }
 
             if(type=='text'){
-                const reg=new RegExp(/[{\d"'<>%;)(&+}]/g)
-                // let oldVal
-                for(let i=0;i<$(this).val().length;i++){
-                    const word=$(this).val()[i]
-                    // console.log(i,reg.test(word))
-                    if(reg.test(word)){
-                        console.log(word)
+                // const reg=/^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$/
+                const reg=/[\d"'<>%;)(&+\[\]]/
 
-                    
+                if(e.which != 8 && e.which != 0 ){
+                    switch(id){
+                        case 'name':
+                            $(this).val($(this).val().replace(reg,''))
+                            if(event=='keydown' && $(this).val().length > 39){
+                                return false
+                            }else{
+                                $(this).css({'border':'1px solid #204379','box-shadow':'inset 0 0 0 2px transparent'}).siblings('#help').text('')
+                            }
+                            break;
+                        
                     }
                 }
-                
-                // /[^\a-\z\A-\Z]/g
-                // /[^\u4E00-\u9FA5]/g
-                // /[^u4e00-u9fa5w]/g
-                // /[\a-\z\A-\Z\u4E00-\u9FA5\ ]
-                
             }
             
             
         })
     },
-    created(){
-        
+    watch:{
+        store:{
+            deep:true,
+            handler:function(newVal){
+                this.inputValue.store=newVal
+            }
+        }
     },
     methods:{
         checkSubmit(e){
             e.preventDefault();
-
             for(let i=0;i< $('input').length;i++){
                 let target=$('input')[i].id
-
+                if(target=='phone' && ($(`input[id=${target}]`).val().length<10)){
+                
+                   $(`input[id=${target}]`).css({'border':'1px solid #E06D6D','box-shadow':'inset 0 0 0 2px #E06D6D'}).siblings('#help').text('wrong format')
+                }
                 for(let k in this.inputValue){
                     if(target==k){
                         if($(`input[id=${target}]`).val()=='' && ($(`input[id=${target}]`).siblings('#help').text())==''){
-                            $(`input[id=${target}]`).siblings('#help').text('required')
+
+                            $(`input[id=${target}]`).css({'border':'1px solid #E06D6D','box-shadow':'inset 0 0 0 2px #E06D6D'}).siblings('#help').text('required')
+                            // store input box
+                            $(`input[id=${target}]`).css({'border':'1px solid #E06D6D','box-shadow':'inset 0 0 0 2px #E06D6D'}).parent().siblings('#help').text('required')
                         }else{
                             if($(`input[id=${target}]`).siblings('#help').text()==''){
-                                $(`input[id=${target}]`).siblings('#help').text('')
+                                
+                                $(`input[id=${target}]`).css({'border':'1px solid #204379','box-shadow':'inset 0 0 0 2px transparent'}).siblings('#help').text('')
                             }
                         }
                     }
@@ -160,7 +218,46 @@ export default{
                 }
                 
             }
-            
+
+            if($('input').siblings('#help').text().trim() ==''){
+
+                this.isSubmit.send=true                
+
+                // test if success
+                if(this.inputValue.name=='Apple'){
+                    this.isSubmit.isOk=true
+                }else{
+                    this.isSubmit.isOk=false
+                }
+                
+            }
+        },
+        checkStore(){
+            const datas=[...this.storesData].splice(',').join('')
+
+            if(this.inputValue.store.length>1){
+                if(!datas.includes(this.inputValue.store)){
+                    this.results=[]
+                    $('input[id=store]').css({'border':'1px solid #E06D6D','box-shadow':'inset 0 0 0 2px #E06D6D'}).parent().siblings('#help').text('no result')
+                    this.isShow=false
+
+                }else{
+                    this.isShow=true
+                    $('input[id=store]').css({'border':'1px solid #204379','box-shadow':'inset 0 0 0 2px transparent'})
+                    for(let i=0;i<this.storesData.length;i++){
+                        this.$set(this.results,i,`${this.storesData[i]}`)
+                    }
+
+                }
+
+            }else{
+                $('input[id=store]').parent().siblings('#help').text('')
+                this.isShow=false
+            }
+        },
+        setStore(val){
+            this.inputValue.store=val
+            this.isShow=false
         }
     },
 

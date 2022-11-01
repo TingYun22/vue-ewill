@@ -1,6 +1,6 @@
 <template>
-    <button class="buttonShap" :class="btnText.toLowerCase()" >
-       {{btnText}}
+    <button class="buttonShap" :class="btnText.toLowerCase()" >       
+       <slot name="btn_contain" />
     </button>
 </template>
 
@@ -10,17 +10,19 @@ export default{
     props:{
         text:{
             type:String
-        }
+        },
+        // isSub:{
+        //     type:Boolean
+        // }
     },
     data(){
         return{
-            btnText:this.text
+            btnText:this.text,
+            // canSubmit:this.isSub
         }
     },
     methods:{
-        checkType(e){
-            console.log(e.type);
-        }
+        
     }
     
 }</script>

@@ -42,6 +42,8 @@
             }  
         }
 
+        
+
         >div:not(.form1_title){
             padding: 5px 0;
             width: 100%;
@@ -51,7 +53,8 @@
                 width: 100%;
                 text-align: left;
             }
-    
+        
+            
             
     
             label{
@@ -116,14 +119,69 @@
                 color: $errorRedColor;
             }
 
-            .arrow{
+            .arrow::before{
+                content: url('../../images/drop\ down.png');
                 position: absolute;
-                bottom: calc(40px / 2 - 6px);
-                right: 25px;
+                top:calc((40px / 2) - (24px / 2));
+                right: 1rem;
+                // outline: 1px solid red;
             }
            
             
             
+        }
+
+        & .store_piece{
+            position: relative;
+            .storeGroup{
+                position: relative;
+                input{
+                    width: 100%;
+                }
+                .arrow::before{
+                    content: url('../../images/drop\ down.png');
+                    position: absolute;
+                    top:calc((40px / 2) - (24px / 2));
+                    right: 1rem;
+                    // outline: 1px solid red;
+                }
+            }
+
+
+            & .store_option{
+                position: absolute;
+                top:calc(height * 1.5);
+                background-color: white;
+                border: 1px solid $basicBlueColor;
+                border-radius:20px ;
+                ul{
+                    list-style: none;
+                    margin: 0;
+                    padding:0;
+                    border-radius:20px;
+                    font-weight: 400;
+                    font-size: 1rem;
+                    line-height: 140%;
+                    color: $textColor2;
+                    box-shadow: 0 3px 10px $gray200Color;
+                    overflow: hidden;
+                    li{
+                       padding: .5rem 1rem;
+                       
+                        &:first-child{
+                            border-radius: 20px 20px 0 0;
+                            
+                        }
+                        &:last-child{
+                           border-radius: 0 0 20px 20px;
+                        }
+
+                       &:hover{
+                        background-color: $lightBlueColor;
+                       }
+                    }
+                }
+            }
         }
 
         /* Chrome, Safari, Edge, Opera */
@@ -141,6 +199,19 @@
         
     }
 
+
+    .submit_changeColor{
+        background-color: $basicEarthColor;
+    }
+
+    #submit_help{
+        padding-top: 8px;
+        min-height: calc(14px * 1.5);
+        font-weight: 400;
+        font-size: $word14;
+        line-height: 150%;
+        color: $errorRedColor;
+    }
     
  
     

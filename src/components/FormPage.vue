@@ -16,7 +16,11 @@
                                 <div>who loves pain</div>
                             </h2>
                             <div class="goFormBtn" @click.prevent="scrollTo('#form1_title')">
-                                <ButtonTemplete :text="'FORM'"  />
+                                <ButtonTemplete :text="'FORM'" >
+                                    <template v-slot:btn_contain>
+                                        FROM
+                                    </template>
+                                </ButtonTemplete>
                             </div>
                             <section>
                                 <div class="paragGroup">
@@ -40,7 +44,8 @@
             
         </div>
         <div class="curve">
-            <!-- <img src="@/assets/images/waves_bg.png" alt=""> -->
+
+                <!-- <img src="@/assets/images/waves_bg.png" alt=""> -->
         </div>
         <ContentLayout>
             <template v-slot:contain>
