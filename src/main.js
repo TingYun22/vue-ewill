@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { router } from './configs'
-
+// import { router } from './configs'
+import 'jquery'
 
 import vuetify from '@/configs/vuetify/index'
 
@@ -24,7 +24,7 @@ services.keys().forEach(function (service) {
 })
 
 new Vue({
-  router,
+//   router,
   vuetify,
   render: h => h(App),
 }).$mount('#app')
