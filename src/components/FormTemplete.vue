@@ -112,7 +112,7 @@ export default {
               if (e.which == 109 || e.which == 45 || e.which == 107 || e.which == 43 || e.which == 101 || e.which == 69) {
                 return false
               }
-              if ($(this).val().length < 11) {
+              if ($(this).val().length < 10) {
                 for (let i = 0; i < $(this).val().length; i++) {
                   let word = $(this).val()[i]
 
