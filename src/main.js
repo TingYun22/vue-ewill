@@ -17,11 +17,11 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 
 Vue.config.productionTip = false
 
-let services = require.context('@/modules/', true, /^.*\/service\/index\.js$/)
+// let services = require.context('@/modules/', true, /^.*\/service\/index\.js$/)
 
-services.keys().forEach(function (service) {
-  services(service).default
-})
+// services.keys().forEach(function (service) {
+//   services(service).default
+// })
 
 new Vue({
 //   router,
