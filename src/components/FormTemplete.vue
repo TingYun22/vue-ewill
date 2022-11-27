@@ -21,7 +21,7 @@
       </div>
       <div>
         <label for="name">name <span>*</span></label>
-        <input v-model="inputValue.name" type="text" name="name" id="name" placeholder="placeholder text" />
+        <input v-model="inputValue.name" type="text" name="name" id="name" placeholder="placeholder text" @focus="checkStart" @blur="checkEnd" />
         <div id="help"></div>
       </div>
       <div>
@@ -93,28 +93,28 @@ export default {
         isOk: false,
       },
       storesData: [...stores],
+      checkInterval: null,
     }
   },
   mounted() {
     $('input').on('keyup keypress blur change keydown', function (e) {
-      const event = e.type
+      //   const event = e.type
 
       const type = $(this).attr('type')
       const id = $(this).attr('id')
+      let currentVal = $(this).val()
 
       if (type == 'number') {
         if (e.which != 8 && e.which != 0) {
-          let copyVal = $(this).val()
-
           switch (id) {
             case 'phone':
               // block input + - e
               if (e.which == 109 || e.which == 45 || e.which == 107 || e.which == 43 || e.which == 101 || e.which == 69) {
                 return false
               }
-              if ($(this).val().length < 10) {
-                for (let i = 0; i < $(this).val().length; i++) {
-                  let word = $(this).val()[i]
+              if (currentVal.length < 10) {
+                for (let i = 0; i < currentVal.length; i++) {
+                  let word = currentVal[i]
 
                   if ((i == 0 && word !== '0') || (i == 1 && word !== '9')) {
                     $(this).css({ border: '1px solid #E06D6D', 'box-shadow': 'inset 0 0 0 2px #E06D6D' }).siblings('#help').text('wrong format')
@@ -133,11 +133,11 @@ export default {
               if (e.which == 109 || e.which == 45 || e.which == 107 || e.which == 43 || e.which == 101 || e.which == 69) {
                 return false
               }
-              for (let i = 0; i < $(this).val().length; i++) {
-                let word = $(this).val()[i]
+              for (let i = 0; i < currentVal.length; i++) {
+                let word = currentVal[i]
                 if (i == 0 && word == '0') {
-                  $(this).val(`${parseInt(copyVal)}`)
-                  if ($(this).val() != '') {
+                  $(this).val(`${parseInt(currentVal)}`)
+                  if (currentVal != '') {
                     $(this).css({ border: '1px solid #204379', 'box-shadow': 'inset 0 0 0 2px transparent' })
                   }
                 } else {
@@ -149,23 +149,27 @@ export default {
         }
       }
 
-      if (type == 'text') {
-        // const reg=/^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$/
-        const reg = /[\d"'<>%;)(&+\[\]]/
+      //   if (type == 'text') {
+      //     // const reg=/^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$/
+      //     const reg = /[\d"'<>%;)(&+\[\]]/
+      //     console.log(currentVal)
+      //     // let newVal
+      //     if (e.which != 8 && e.which != 0) {
+      //       switch (id) {
+      //         case 'name':
+      //           currentVal = currentVal.replace(reg, '')
+      //           $(this).val(currentVal)
 
-        if (e.which != 8 && e.which != 0) {
-          switch (id) {
-            case 'name':
-              $(this).val($(this).val().replace(reg, ''))
-              if (event == 'keydown' && $(this).val().length > 39) {
-                return false
-              } else {
-                $(this).css({ border: '1px solid #204379', 'box-shadow': 'inset 0 0 0 2px transparent' }).siblings('#help').text('')
-              }
-              break
-          }
-        }
-      }
+      //           if (event == 'keydown' && currentVal.length > 39) {
+      //             return false
+      //           } else {
+      //             $(this).css({ border: '1px solid #204379', 'box-shadow': 'inset 0 0 0 2px transparent' }).siblings('#help').text('')
+      //           }
+
+      //           break
+      //       }
+      //     }
+      //   }
     })
   },
   watch: {
@@ -175,8 +179,32 @@ export default {
         this.inputValue.store = newVal
       },
     },
+    name: {
+      deep: true,
+      handler: function (newVal) {
+        this.inputValue.name = newVal
+      },
+    },
   },
   methods: {
+    checkText() {
+      this.inputValue.name = this.inputValue.name.replace(/[\d"'<>%;)(&+\[\]]/g, '')
+      if (this.inputValue.name.length > 39) {
+        this.inputValue.name = this.inputValue.name.slice(0, 39)
+      }
+
+      if (this.inputValue.name.trim == '') {
+        $('input[name="name"]').css({ border: '1px solid #E06D6D', 'box-shadow': 'inset 0 0 0 2px #E06D6D' }).siblings('#help').text('wrong format')
+      } else {
+        $('input[name="name"]').css({ border: '1px solid #204379', 'box-shadow': 'inset 0 0 0 2px transparent' }).siblings('#help').text('')
+      }
+    },
+    checkStart() {
+      this.checkInterval = setInterval(this.checkText, 100)
+    },
+    checkEnd() {
+      clearInterval(this.checkInterval)
+    },
     checkSubmit(e) {
       e.preventDefault()
       for (let i = 0; i < $('input').length; i++) {
